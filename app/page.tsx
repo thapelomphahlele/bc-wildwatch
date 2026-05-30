@@ -43,7 +43,6 @@ export default function Home() {
             onClick={() => signIn("azure-ad", { callbackUrl: "/dashboard" })}
             className="w-full flex items-center justify-center gap-3 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-foreground font-semibold py-3 px-4 rounded-lg transition-colors duration-200"
           >
-            {/* The SVG code stays exactly the same */}
             <svg className="w-5 h-5" viewBox="0 0 21 21" xmlns="http://www.w3.org/2000/svg">
               <path d="M10 0h11v11H10z" fill="#f25022" />
               <path d="M0 0h9v11H0z" fill="#00a4ef" />
