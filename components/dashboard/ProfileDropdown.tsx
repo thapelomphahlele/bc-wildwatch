@@ -1,9 +1,14 @@
 "use client";
 import React, { useState } from "react";
+import { useSession, signOut } from "next-auth/react";
 
 export default function ProfileDropdown() {
     const [isOpen, setIsOpen] = useState(false);
-    const initial = "T"; // Hardcoded for now
+    const { data: session } = useSession();
+
+    const initial = session?.user?.name?.charAt(0).toUpperCase() || "U";
+    const userName = session?.user?.name || "BC Student";
+    const userEmail = session?.user?.email || "student@belgiumcampus.ac.za";
 
     return (
         <div className="relative">
@@ -20,13 +25,11 @@ export default function ProfileDropdown() {
                     <div className="fixed inset-0 z-10" onClick={() => setIsOpen(false)}></div>
                     <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-[#1f2937] border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-20 py-1">
                         <div className="px-4 py-2 border-b border-gray-100 dark:border-gray-700">
-                            <p className="text-sm font-semibold text-foreground">Thapelo</p>
-                            <p className="text-xs text-foreground/60 truncate">thapelo@student.belgiumcampus.ac.za</p>
+                            <p className="text-sm font-semibold text-foreground truncate">{userName}</p>
+                            <p className="text-xs text-foreground/60 truncate">{userEmail}</p>
                         </div>
-                        <a href="#" className="block px-4 py-2 text-sm text-foreground/80 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Profile</a>
-                        <a href="#" className="block px-4 py-2 text-sm text-foreground/80 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors">Settings</a>
                         <button
-                            onClick={() => console.log("Sign out triggered")}
+                            onClick={() => signOut({ callbackUrl: '/' })}
                             className="w-full text-left block px-4 py-2 text-sm text-bc-red hover:bg-red-50 dark:hover:bg-red-900/10 transition-colors"
                         >
                             Sign out
